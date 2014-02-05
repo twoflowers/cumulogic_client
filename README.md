@@ -20,6 +20,21 @@ Or install it yourself as:
 
 TODO: Write usage instructions here
 
+## Testing
+
+Tests can be run using "rake test".  The test suite requires a working 
+CumuLogic controller target, and a username and password with permission 
+to deploy services.
+
+In order to provide the test suite with the required credentials, place a 
+YAML file at ~/.cumulogic_client.yml with the following contents:
+
+URL: https://demo.cumulogic.com/cumulogic/REST/
+USER: yourusername
+PASSWORD: yourpassword
+SSL: true
+
+
 ## Contributing
 
 1. Fork it
