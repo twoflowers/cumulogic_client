@@ -11,7 +11,23 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-%w[ base64 cgi openssl uri digest/sha1 net/https net/http json ].each { |f| require f }
 
-Dir[File.join(File.dirname(__FILE__), 'cumulogic_client/*.rb')].sort.each { |rb| require rb }
+require 'cumulogic_client'
+require 'yaml'
 
+describe "connection" do
+  before(:all) do
+    cnf = YAML::load(File.open(File.expand_path('~/.cumulogic_client.yml')))
+    @URL = cnf['URL']
+    @USER = cnf['USER']
+    @PASSWORD = cnf['PASSWORD']
+    @SSL = (cnf['SSL']) || false
+    @client = CumulogicClient::BaseClient.new(@URL, @USER, @PASSWORD, @SSL)
+  end
+  it "can log in" do
+    @client.login()
+  end
+  it "can get DB engine list" do
+    @client.call("dbaas/dbengine/list")
+  end
+end
