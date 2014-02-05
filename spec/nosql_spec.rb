@@ -15,24 +15,6 @@
 require 'cumulogic_client'
 require 'yaml'
 
-describe "base_client" do
-  before(:all) do
-    cnf = YAML::load(File.open(File.expand_path('~/.cumulogic_client.yml')))
-    @URL = cnf['URL']
-    @USER = cnf['USER']
-    @PASSWORD = cnf['PASSWORD']
-    @SSL = (cnf['SSL']) || false
-    @DEBUG = (cnf['DEBUG']) || false
-    @client = CumulogicClient::BaseClient.new(@URL, @USER, @PASSWORD, @SSL, @DEBUG)
-  end
-  it "can log in" do
-    @client.login()
-  end
-  it "can get DB engine list" do
-    @client.call("dbaas/dbengine/list")
-  end
-end
-
 describe "nosql" do
   before(:all) do
     cnf = YAML::load(File.open(File.expand_path('~/.cumulogic_client.yml')))
