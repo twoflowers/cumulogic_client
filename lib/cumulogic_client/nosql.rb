@@ -12,22 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'cumulogic_client'
-require 'yaml'
+class CumulogicClient::Nosql
+  def initialize(api_url, username, password, use_ssl=nil)
+    @client = CumulogicClient::BaseClient.new(api_url, username, password, use_ssl)
+  end
 
-describe "connection" do
-  before(:all) do
-    cnf = YAML::load(File.open(File.expand_path('~/.cumulogic_client.yml')))
-    @URL = cnf['URL']
-    @USER = cnf['USER']
-    @PASSWORD = cnf['PASSWORD']
-    @SSL = (cnf['SSL']) || false
-    @client = CumulogicClient::BaseClient.new(@URL, @USER, @PASSWORD, @SSL)
-  end
-  it "can log in" do
-    @client.login()
-  end
-  it "can get DB engine list" do
-    @client.call("dbaas/dbengine/list")
+  def engine_list()
+    return @client.call('nosql/nosqlengine/list')
   end
 end

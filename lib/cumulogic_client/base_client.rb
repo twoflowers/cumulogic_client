@@ -13,11 +13,12 @@
 # limitations under the License.
 
 class CumulogicClient::BaseClient
-  def initialize(api_url, username, password, use_ssl=nil)
+  def initialize(api_url, username, password, use_ssl=nil, debug=false)
     @api_url  = api_url
     @username = username
     @password = password
     @use_ssl  = use_ssl
+    @debug    = debug
     @validationparams = nil
   end
 
@@ -30,8 +31,8 @@ class CumulogicClient::BaseClient
   
   def request(command, params=nil)
     url = "#{@api_url}#{command}"
-    puts url
-    puts params
+    puts url if @debug
+    puts params if @debug
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = @use_ssl
@@ -48,7 +49,7 @@ class CumulogicClient::BaseClient
       raise RuntimeError, "Unknown error: code=#{response.code} message=#{response.message}"
     end
 
-    puts response.body
+    puts response.body if @debug
     return JSON.parse(response.body)
 
   end
