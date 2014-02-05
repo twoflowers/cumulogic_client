@@ -29,10 +29,10 @@ to deploy services.
 In order to provide the test suite with the required credentials, place a 
 YAML file at ~/.cumulogic_client.yml with the following contents:
 
-URL: https://demo.cumulogic.com/cumulogic/REST/
-USER: yourusername
-PASSWORD: yourpassword
-SSL: true
+    URL: https://demo.cumulogic.com/cumulogic/REST/
+    USER: yourusername
+    PASSWORD: yourpassword
+    SSL: true
 
 
 ## Contributing
