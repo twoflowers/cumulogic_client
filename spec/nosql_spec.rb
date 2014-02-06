@@ -22,16 +22,47 @@ describe "nosql" do
     @USER = cnf['USER']
     @PASSWORD = cnf['PASSWORD']
     @SSL = (cnf['SSL']) || false
-    @nosql = CumulogicClient::Nosql.new(@URL, @USER, @PASSWORD, @SSL)
+    @DEBUG = (cnf['DEBUG']) || false
+    @nosql = CumulogicClient::Nosql.new(@URL, @USER, @PASSWORD, @SSL, @DEBUG)
   end
   it "can get engine list" do
     @nosql.engine_list()
   end
   it "can create nosql instance" do
-    # pass
+    spec = CumulogicClient::Nosql::NoSQLSpec.new()
+    spec.name = 'unittest'
+    spec.description = 'testing for client library'
+    spec.nodes = "1"
+    spec.collectionName = 'UnitTestCollection'
+    spec.characterSet = 'UTF-8'
+    spec.port = "27017"
+    spec.noSqlEngineId = "1"
+    spec.targetCloudId = "1"
+    spec.availabilityZoneName = "Zone#3"
+    spec.instanceTypeId = "4"
+    spec.serviceTag = 'Development'
+    spec.accessGroupId = "0"
+    spec.noSqlParamGroupId = "0"
+    spec.storageSize = "10"
+    spec.isbackupPreferenceSet = "0"
+    spec.isAutoUpdateEnabled = "0"
+    spec.ownerType = "1"
+    spec.isAvailabilityZoneMandatory = "true"
+    spec.isInstanceTypeMandatory = "true"
+    spec.availabilityZone = "az-3.region-a.geo-1"
+    spec.isVolumeSizeMandatory = "true"
+    spec.backupRetentionPeriod = "1"
+    spec.backupStartTime = ""
+    spec.start = "1"
+
+    @nosql.create(spec)
+  end
+  it "can delete errored intances" do
+    instances = @nosql.list()
+    instances.each { |instance| @nosql.delete(instance["noSqlInstanceId"]) if instance["status"] == 3 }
   end
   it "can list nosql instances" do
-    # pass 
+    @nosql.list()
   end
   it "can clone nosql instance" do
     # pass
@@ -39,8 +70,9 @@ describe "nosql" do
   it "can restart nosql instance" do
     # pass
   end
-  it "can get nosql instance" do
-    # pass
+  it "can get nosql instance events" do
+    #instanceId = '5'
+    #@nosql.events(instanceId)
   end
   it "can terminate nosql instance" do
     # pass

@@ -31,4 +31,7 @@ describe "base_client" do
   it "can get DB engine list" do
     @client.call("dbaas/dbengine/list")
   end
+  it "can get instance types" do
+    @client.listInstanceTypes("Zone#1")
+  end
 end
