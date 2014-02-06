@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["chip.childers@gmail.com"]
   spec.description   = %q{Ruby API bindings for the CumuLogic platform's RESTful API.}
   spec.summary       = %q{API binding gem that can be used to communicate with the CumuLogic platform's RESTful API.}
-  spec.homepage      = "http://www.cumulogic.com/"
+  spec.homepage      = "https://github.com/cumulogic/cumulogic_client"
   spec.license       = "ASLv2"
 
   spec.files         = `git ls-files`.split($/)
