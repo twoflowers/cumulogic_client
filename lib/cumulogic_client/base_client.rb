@@ -47,7 +47,7 @@ class CumulogicClient::BaseClient
 
     if !response.is_a?(Net::HTTPOK)
       if ["431","530","404"].include?(response.code)
-        raise ArbumentError, response.message
+        raise ArgumentError, response.message
       end
       raise RuntimeError, "Username and password not accepted" if ["401","403"].include?(response.code)
       raise RuntimeError, "Unknown error: code=#{response.code} message=#{response.message}"
