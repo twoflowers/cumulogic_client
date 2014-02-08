@@ -36,7 +36,7 @@ class CumulogicClient::BaseClient
   def request(command, params=nil)
     url = "#{@api_url}#{command}"
     puts url if @debug
-    puts URI::encode(params.to_json) if @debug
+    puts params.to_json if @debug
     uri = URI.parse(url)
     http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = @use_ssl

@@ -38,7 +38,6 @@ describe "nosql" do
     spec.port = "27017"
     spec.noSqlEngineId = "1"
     spec.targetCloudId = "1"
-    spec.availabilityZoneName = "Zone#3"
     spec.instanceTypeId = "4"
     spec.serviceTag = 'Development'
     spec.accessGroupId = "0"
