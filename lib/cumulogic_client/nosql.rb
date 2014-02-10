@@ -26,11 +26,18 @@ module CumulogicClient
       return @client.call('nosql/instance/list')
     end
 
+    def get(instanceId)
+      return @client.call('nosql/instance/getAllHostByNoSqlInstanceID', wrapParam(instanceId))
+    end
+
     def events(instanceId)
-      params = {
+      return @client.call('nosql/instance/showEvents', wrapParams(instanceId))
+    end
+
+    def wrapParam(instanceId)
+      {
         'noSqlInstanceId' => instanceId
       }
-      return @client.call('nosql/instance/showEvents', params)
     end
 
     def delete(instanceId)
