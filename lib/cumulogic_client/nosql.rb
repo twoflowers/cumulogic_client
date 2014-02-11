@@ -40,11 +40,12 @@ module CumulogicClient
       }
     end
 
+    def terminate(instanceId)
+      return @client.call('nosql/instance/terminateNoSqlInstance', wrapParam(instanceId))
+    end
+
     def delete(instanceId)
-      params = {
-        'noSqlInstanceId' => instanceId
-      }
-      return @client.call('nosql/instance/deleteNoSqlInstance', params)
+      return @client.call('nosql/instance/deleteNoSqlInstance', wrapParam(instanceId))
     end
 
     def create(spec)
