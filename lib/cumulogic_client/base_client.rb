@@ -95,6 +95,16 @@ module CumulogicClient
       end
     end
 
+    def get_serviceplans(createdBy, serviceType)
+      params = {
+        'createdBy' => createdBy,
+        'serviceType' => serviceType
+      }
+      call('serviceplan/getAllServicePlansByUserId', params)
+    end
+
+
+
   end
 
 end
