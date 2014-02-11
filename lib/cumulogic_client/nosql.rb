@@ -55,6 +55,10 @@ module CumulogicClient
       return @newInstanceId
     end
 
+    def get_serviceplans(createdBy, serviceType)
+      @client.get_serviceplans(createdBy, serviceType)
+    end
+
     def isComplete()
       instances = self.list()
       puts instances
