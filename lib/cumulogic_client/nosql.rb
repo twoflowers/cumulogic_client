@@ -48,10 +48,10 @@ module CumulogicClient
       return @client.call('nosql/instance/deleteNoSqlInstance', wrapParam(instanceId))
     end
 
-    def create(spec)
+    def create(spec, wait=true)
       response = @client.call('nosql/instance/createNoSqlInstance', spec.to_hash)
       @newInstanceId = response[0]['noSqlInstanceId']
-      @client.provisioning_completed(self, 30)
+      @client.provisioning_completed(self, 30) if wait
       return @newInstanceId
     end
 
